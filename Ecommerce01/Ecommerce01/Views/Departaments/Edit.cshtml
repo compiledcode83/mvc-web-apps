@@ -1,10 +1,10 @@
 ﻿@model Ecommerce01.Models.Departament
 
 @{
-    ViewBag.Title = "Modificazione";
+    ViewBag.Title = "Modifica";
 }
 
-<h2>Modificazione</h2>
+<h2>Modifica</h2>
 
 
 @using (Html.BeginForm())
@@ -26,16 +26,31 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvare" class="btn btn-success" />
+                @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-success" })
+                <input type="submit" value="Salva" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-primary" })
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

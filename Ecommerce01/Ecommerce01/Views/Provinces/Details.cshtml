@@ -1,0 +1,58 @@
+﻿@model Ecommerce01.Models.Province
+
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<h2>Dettagli</h2>
+
+<div>
+    <h4>Province</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TwoInitial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwoInitial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartamentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartamentId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edita", "Edit", new { id = Model.ProvinceId }, new { @class = "btn btn-primary" }) |
+    
+        @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-success" })
+    
+</p>

@@ -18,9 +18,26 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edita", "Edit", new { id = Model.DepartamentId }, new { @class = "btn btn-warning" }) |
-    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-primary" })
-</p>
+<div>
+    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Edita", "Edit", new { id = Model.DepartamentId }, new {@class= "btn btn-primary" })
+   
+</div>

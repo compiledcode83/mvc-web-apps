@@ -10,107 +10,107 @@ using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
-    public class DepartamentsController : Controller
+    public class ProvincesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
 
-        // GET: Departaments
+        // GET: Provinces
         public ActionResult Index()
         {
-            return View(db.Departaments.ToList());
+            return View(db.Provinces.ToList());
         }
 
-        // GET: Departaments/Details/5
+        // GET: Provinces/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departament departament = db.Departaments.Find(id);
-            if (departament == null)
+            Province province = db.Provinces.Find(id);
+            if (province == null)
             {
                 return HttpNotFound();
             }
-            return View(departament);
+            return View(province);
         }
 
-        // GET: Departaments/Create
+        // GET: Provinces/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Departaments/Create
+        // POST: Provinces/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepartamentId,Name,Longitude,Latitude")] Departament departament)
+        public ActionResult Create([Bind(Include = "ProvinceId,Name,TwoInitial,Longitude,Latitude,DepartamentId")] Province province)
         {
             if (ModelState.IsValid)
             {
-                db.Departaments.Add(departament);
+                db.Provinces.Add(province);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(departament);
+            return View(province);
         }
 
-        // GET: Departaments/Edit/5
+        // GET: Provinces/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departament departament = db.Departaments.Find(id);
-            if (departament == null)
+            Province province = db.Provinces.Find(id);
+            if (province == null)
             {
                 return HttpNotFound();
             }
-            return View(departament);
+            return View(province);
         }
 
-        // POST: Departaments/Edit/5
+        // POST: Provinces/Edit/5
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DepartamentId,Name,Longitude,Latitude")] Departament departament)
+        public ActionResult Edit([Bind(Include = "ProvinceId,Name,TwoInitial,Longitude,Latitude,DepartamentId")] Province province)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(departament).State = EntityState.Modified;
+                db.Entry(province).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(departament);
+            return View(province);
         }
 
-        // GET: Departaments/Delete/5
+        // GET: Provinces/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departament departament = db.Departaments.Find(id);
-            if (departament == null)
+            Province province = db.Provinces.Find(id);
+            if (province == null)
             {
                 return HttpNotFound();
             }
-            return View(departament);
+            return View(province);
         }
 
-        // POST: Departaments/Delete/5
+        // POST: Provinces/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Departament departament = db.Departaments.Find(id);
-            db.Departaments.Remove(departament);
+            Province province = db.Provinces.Find(id);
+            db.Provinces.Remove(province);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

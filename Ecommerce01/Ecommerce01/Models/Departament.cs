@@ -11,13 +11,18 @@ namespace Ecommerce01.Models
         [Key]
         public int DepartamentId { get; set; }
 
-        [Required(ErrorMessage = "This field {0} is requiered !")]
-        [MaxLength(50, ErrorMessage = "This field {0} must be {1} characters length!")]
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [MaxLength(50, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name="Regione")]
         public string Name { get; set; }
 
-        //side one
-        public virtual ICollection<City> Cities { get; set; }
+        [Display(Name = "Longitudine")]
+        public decimal? Longitude { get; set; }
 
+        [Display(Name = "Latitudine")]
+        public decimal? Latitude { get; set; }
+
+        //side one to many
+        public virtual ICollection<Province> Provinces { get; set; }
     }
 }

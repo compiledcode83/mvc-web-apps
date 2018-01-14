@@ -1,11 +1,10 @@
 ﻿@model Ecommerce01.Models.City
 
 @{
-    ViewBag.Title = "Modificazione";
+    ViewBag.Title = "Modifica";
 }
 
-<h2>Modificazione</h2>
-
+<h2>Modifica</h2>
 
 @using (Html.BeginForm())
 {
@@ -26,25 +25,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DepartamentId, "Regione", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DepartamentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartamentId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvare" class="btn btn-success" />
+                @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-success" })
+                <input type="submit" value="Salva" class="btn btn-primary" />
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-primary" })
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

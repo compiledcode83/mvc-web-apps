@@ -14,6 +14,9 @@ namespace Ecommerce01.Models
         }
 
         public DbSet<Departament> Departaments { get; set; }
+        
+        public DbSet<Province> Provinces { get; set; }
+
         public DbSet<City> Cities { get; set; }
     }
 }

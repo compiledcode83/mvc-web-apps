@@ -1,18 +1,24 @@
 ﻿@model IEnumerable<Ecommerce01.Models.Departament>
 
 @{
-    ViewBag.Title = "Regioni";
+    ViewBag.Title = "Regione";
 }
 
-<h2>Regioni</h2>
+<h2>Regione</h2>
 
 <p>
-    @Html.ActionLink("Creare Nuova", "Create", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Crea Nuova", "Create",new { }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
         </th>
         <th></th>
     </tr>
@@ -23,11 +29,17 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edita", "Edit", new { id=item.DepartamentId }, new { @class = "btn btn-warning" }) |
-            @Html.ActionLink("Dettagli", "Details", new { id=item.DepartamentId },new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Elimina", "Delete", new { id=item.DepartamentId }, new { @class ="btn btn-danger" })
-            @*@Html.ActionLink("LinkText", "ActionName", new { id = item.id }, new { @class = "btn btn-success" })*@
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.ActionLink("Edita", "Edit", new { id=item.DepartamentId },new {@class="btn  btn-info" }) |
+            @Html.ActionLink("Dettagli", "Details", new { id=item.DepartamentId }, new { @class = "btn  btn-warning" }) |
+            @Html.ActionLink("Elimina", "Delete", new { id=item.DepartamentId }, new { @class = "btn  btn-danger" })
         </td>
     </tr>
 }
+
 </table>

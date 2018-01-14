@@ -11,14 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Departament.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Departament.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -26,9 +18,26 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProvinceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProvinceId)
+        </dd>
+
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edita", "Edit", new { id = Model.CityId }, new { @class = "btn btn-warning" }) |
-    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-primary" })
-</p>
+<div>
+    @Html.ActionLink("Ritorna alla Lista", "Index", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Edita", "Edit", new { id = Model.CityId }, new { @class = "btn btn-primary" })
+   
+</div>

@@ -17,8 +17,7 @@ namespace Ecommerce01.Controllers
         // GET: Cities
         public ActionResult Index()
         {
-            var cities = db.Cities.Include(c => c.Departament);
-            return View(cities.ToList());
+            return View(db.Cities.ToList());
         }
 
         // GET: Cities/Details/5
@@ -39,32 +38,23 @@ namespace Ecommerce01.Controllers
         // GET: Cities/Create
         public ActionResult Create()
         {
-            ViewBag.DepartamentId = new SelectList(
-                db.Departaments.OrderBy(d => d.Name),
-                "DepartamentId", "Name");
             return View();
         }
-        
+
         // POST: Cities/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CityId,Name,DepartamentId")] City city)
+        public ActionResult Create([Bind(Include = "CityId,Name,Longitude,Latituden,ProvinceId")] City city)
         {
             if (ModelState.IsValid)
             {
-                //add to databse
                 db.Cities.Add(city);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartamentId = new SelectList(
-                db.Departaments.OrderBy(d => d.Name), 
-                "DepartamentId", 
-                "Name", 
-                city.DepartamentId);
             return View(city);
         }
 
@@ -80,11 +70,6 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartamentId = new SelectList(
-                db.Departaments.OrderBy(d => d.Name), 
-                "DepartamentId", 
-                "Name", 
-                city.DepartamentId);
             return View(city);
         }
 
@@ -93,7 +78,7 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CityId,Name,DepartamentId")] City city)
+        public ActionResult Edit([Bind(Include = "CityId,Name,Longitude,Latitude,ProvinceId")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -101,11 +86,6 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartamentId = new SelectList(
-                db.Departaments.OrderBy(d => d.Name),
-                "DepartamentId",
-                "Name", 
-                city.DepartamentId);
             return View(city);
         }
 
