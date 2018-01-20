@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Ecommerce01.Models.Province>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Departament.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SigCap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TwoInitial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitud)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departament.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SigCap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TwoInitial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitud)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProvinceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProvinceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProvinceId })
+        </td>
+    </tr>
+}
+
+</table>
