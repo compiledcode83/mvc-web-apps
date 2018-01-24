@@ -7,13 +7,13 @@ namespace Ecommerce01.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Indices : IMigrationMetadata
+    public sealed partial class SeedConfigurations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Indices));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedConfigurations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801202134316_Indices"; }
+            get { return "201801242112329_SeedConfigurations"; }
         }
         
         string IMigrationMetadata.Source

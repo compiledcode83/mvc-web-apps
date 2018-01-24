@@ -199,7 +199,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Classes\DropDownHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -207,20 +209,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801202101103_InitialCreate.cs" />
-    <Compile Include="Migrations\201801202101103_InitialCreate.Designer.cs">
-      <DependentUpon>201801202101103_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201801241846072_InitialDatabase.cs" />
+    <Compile Include="Migrations\201801241846072_InitialDatabase.Designer.cs">
+      <DependentUpon>201801241846072_InitialDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801202123015_Initial.cs" />
-    <Compile Include="Migrations\201801202123015_Initial.Designer.cs">
-      <DependentUpon>201801202123015_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801202134316_Indices.cs" />
-    <Compile Include="Migrations\201801202134316_Indices.Designer.cs">
-      <DependentUpon>201801202134316_Indices.cs</DependentUpon>
+    <Compile Include="Migrations\201801242112329_SeedConfigurations.cs" />
+    <Compile Include="Migrations\201801242112329_SeedConfigurations.Designer.cs">
+      <DependentUpon>201801242112329_SeedConfigurations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\Departament.cs" />
     <Compile Include="Models\Ecommerce01Context.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -297,6 +296,11 @@
     <Content Include="Views\Provinces\Details.cshtml" />
     <Content Include="Views\Provinces\Edit.cshtml" />
     <Content Include="Views\Provinces\Index.cshtml" />
+    <Content Include="Views\Cities\Create.cshtml" />
+    <Content Include="Views\Cities\Delete.cshtml" />
+    <Content Include="Views\Cities\Details.cshtml" />
+    <Content Include="Views\Cities\Edit.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,14 +319,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801202101103_InitialCreate.resx">
-      <DependentUpon>201801202101103_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801241846072_InitialDatabase.resx">
+      <DependentUpon>201801241846072_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801202123015_Initial.resx">
-      <DependentUpon>201801202123015_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801202134316_Indices.resx">
-      <DependentUpon>201801202134316_Indices.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801242112329_SeedConfigurations.resx">
+      <DependentUpon>201801242112329_SeedConfigurations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

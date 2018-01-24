@@ -12,10 +12,10 @@ namespace Ecommerce01.Models
         [Key]
         public int DepartamentId { get; set; }
 
-        [Required(ErrorMessage = "The field {0} is required")]
-        [MaxLength(50, ErrorMessage = "The field {0} must be maximum {1} characters length")]
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [MaxLength(50, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "Regione")]
-        [Index("Departament_Name_Index", IsUnique = true)]
+        //[Index("Departament_Name_Index", IsUnique = true)]
         public string Name { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N6}", ApplyFormatInEditMode = true)]
@@ -29,7 +29,7 @@ namespace Ecommerce01.Models
         [Display(Name = "Longitudine")]
         public decimal? Longitud { get; set; }
 
-
+       
         //side one to many
         public virtual ICollection<Province> Provinces { get; set; }
     }

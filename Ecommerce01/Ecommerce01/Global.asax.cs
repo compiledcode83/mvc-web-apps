@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-//using Ecommerce01.Migrations;
+
 using Ecommerce01.Models;
 
 namespace Ecommerce01
@@ -20,8 +21,8 @@ namespace Ecommerce01
         {
             //added
             //and simplify with usings
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<Ecommerce01Context,Configuration>());
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Ecommerce01Context, Migrations.Configuration>());
+          
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

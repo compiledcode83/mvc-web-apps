@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Applicazione ASP.NET</title>
+    <title>@ViewBag.Title - ECommerce ASP.NET Core MVC</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -19,9 +19,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Ecommerce Base", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Ecommerce Base</a>*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                   @* <li>@Html.ActionLink("Titolo", "action Index", "Controller Home")</li>*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Chi siamo", "About", "Home")</li>
                     <li>@Html.ActionLink("Contatti", "Contact", "Home")</li>
@@ -37,7 +39,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Italy - mobappdev1 - Vargas - Applicazione ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Italy - Vargas - mobappdev1 -  ECommerce ASP.NET Core MVC</p>
         </footer>
     </div>
 
@@ -47,4 +49,9 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-@* @Scripts.Render("~/Scripts/script.js") *@
+@* add @Scripts.Render("~/Scripts/script.js") *@
+@* <ul class="nav navbar-nav">
+        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+        ...
+    </ul> *@

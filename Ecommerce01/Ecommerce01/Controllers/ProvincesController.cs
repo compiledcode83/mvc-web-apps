@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Ecommerce01.Classes;
 using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
@@ -39,7 +40,11 @@ namespace Ecommerce01.Controllers
         // GET: Provinces/Create
         public ActionResult Create()
         {
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name");
+            //add order by "combobox
+            ViewBag.DepartamentId = new SelectList(
+                DropDownHelper.GetDepartaments(),
+                "DepartamentId", 
+                "Name");
             return View();
         }
 
@@ -57,7 +62,11 @@ namespace Ecommerce01.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", province.DepartamentId);
+            ViewBag.DepartamentId = new SelectList(
+                DropDownHelper.GetDepartaments(), 
+                "DepartamentId", 
+                "Name", 
+                province.DepartamentId);
             return View(province);
         }
 
@@ -73,7 +82,11 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", province.DepartamentId);
+            ViewBag.DepartamentId = new SelectList(
+               DropDownHelper.GetDepartaments(),
+                "DepartamentId", "" +
+                "Name", 
+                province.DepartamentId);
             return View(province);
         }
 
@@ -90,7 +103,11 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", province.DepartamentId);
+            ViewBag.DepartamentId = new SelectList(
+                DropDownHelper.GetDepartaments(),
+                "DepartamentId", 
+                "Name", 
+                province.DepartamentId);
             return View(province);
         }
 

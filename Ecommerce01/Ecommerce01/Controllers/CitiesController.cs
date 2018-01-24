@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Ecommerce01.Classes;
 using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
@@ -17,7 +18,8 @@ namespace Ecommerce01.Controllers
         // GET: Cities
         public ActionResult Index()
         {
-            return View(db.Cities.ToList());
+            var cities = db.Cities.Include(c => c.Departament).Include(c => c.Province);
+            return View(cities.ToList());
         }
 
         // GET: Cities/Details/5
@@ -38,6 +40,8 @@ namespace Ecommerce01.Controllers
         // GET: Cities/Create
         public ActionResult Create()
         {
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name");
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name");
             return View();
         }
 
@@ -46,7 +50,7 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CityId,Name,Longitude,Latituden,ProvinceId")] City city)
+        public ActionResult Create([Bind(Include = "CityId,Name,SigCap,DepartamentId,ProvinceId,Latitud,Longitud")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +58,9 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", city.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", city.ProvinceId);
+            
             return View(city);
         }
 
@@ -70,6 +76,8 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", city.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", city.ProvinceId);
             return View(city);
         }
 
@@ -78,7 +86,7 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CityId,Name,Longitude,Latitude,ProvinceId")] City city)
+        public ActionResult Edit([Bind(Include = "CityId,Name,SigCap,DepartamentId,ProvinceId,Latitud,Longitud")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +94,8 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", city.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", city.ProvinceId);
             return View(city);
         }
 

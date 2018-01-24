@@ -15,18 +15,19 @@ namespace Ecommerce01.Models
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [MaxLength(50, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "Provincia")]
-        [Index("Province_Name_Index", 2, IsUnique = true)]
+        //[Index("Province_Name_Index", 2, IsUnique = true)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [StringLength(5, MinimumLength = 5)]
         [Display(Name = "CAP")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Cap deve ser numerico")]
         public string SigCap { get; set; }
 
-        //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [Required(ErrorMessage = "Questo campo {0} è necessario!"), StringLength(2, MinimumLength = 2)]
-        [MaxLength(2, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
-        [Display(Name = "Sigla")]
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [StringLength(2, MinimumLength = 2)]
+        [Display(Name = "Sigla [XX]")]
+        [RegularExpression(@"^[A-Z]+$", ErrorMessage = "Sigla composta da solo lettere")]
         public string TwoInitial { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N6}", ApplyFormatInEditMode = true)]
@@ -41,15 +42,15 @@ namespace Ecommerce01.Models
         public decimal? Longitud { get; set; }
 
 
-        [Required(ErrorMessage = "The field {0} is required")]
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [Display(Name = "Regione")]
-        [Range(1, double.MaxValue, ErrorMessage = "You must select a {0}")]
-        [Index("Province_Name_Index", 1, IsUnique = true)]
+        [Range(1, double.MaxValue, ErrorMessage = "Devi selezionare un {0}")]
+        //[Index("Province_Name_Index", 1, IsUnique = true)]
         public int DepartamentId { get; set; }
-
-
+        
         public virtual Departament Departament { get; set; }
-        //////side one to many
-        //public virtual ICollection<City> Cities { get; set; }
+        //side one to many
+        public virtual ICollection<City> Cities { get; set; }
+               
     }
 }
