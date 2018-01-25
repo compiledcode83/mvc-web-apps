@@ -22,6 +22,7 @@ namespace Ecommerce01
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
+                       "~/Scripts/efor_prov.js",
                        "~/Scripts/script.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jquery")
@@ -33,11 +34,3 @@ namespace Ecommerce01
         }
     }
 }
-
-//bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-//                      "~/Scripts/moment.js",
-//                      "~/Scripts/bootstrap.js",
-//                      "~/Scripts/respond.js",
-//                      "~/Scripts/bootstrap-datetimepicker.js",
-//                      "~/Scripts/fileupload.js",
-//                      "~/Scripts/ecommerce.js"));
