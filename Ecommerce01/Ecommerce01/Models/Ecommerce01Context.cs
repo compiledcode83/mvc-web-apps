@@ -11,6 +11,7 @@ namespace Ecommerce01.Models
         //DefaultConnection: in Web.config
         public Ecommerce01Context() : base("DefaultConnection")
         {
+            // db.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Departament> Departaments { get; set; }

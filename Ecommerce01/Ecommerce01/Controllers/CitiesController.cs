@@ -125,6 +125,19 @@ namespace Ecommerce01.Controllers
             return RedirectToAction("Index");
         }
 
+        ////add
+        ////[HttpGet]
+        //public JsonResult GetProvinces(int departamentId)
+        //{
+        //    //can be
+        //    //https://stackoverflow.com/questions/4596371/what-are-the-downsides-to-turning-off-proxycreationenabled-for-ctp5-of-ef-code-f
+        //    //http://www.c-sharpcorner.com/UploadFile/db2972/json-result-in-controller-sample-in-mvc-day-13/
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    var provinces = db.Provinces.Where(p => p.DepartamentId == departamentId);
+        //    // can be  return Json(modelList,JsonRequestBehavior.AllowGet);
+        //    return Json(provinces);
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
