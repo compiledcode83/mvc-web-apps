@@ -54,9 +54,34 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Cities.Add(city);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //controllo duplicati
+                var existingCitye = db.Cities.SingleOrDefault(
+                c => c.Name == city.Name 
+                && c.SigCap == city.SigCap);
+                if (existingCitye != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    db.Cities.Add(city);
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        //if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        //{
+                        //    ModelState.AddModelError(string.Empty, "Esiste gia un Registro con lo stesso valore");
+                        //}
+                        //else
+                        //{
+                        ModelState.AddModelError(string.Empty, exception.Message);
+                        //}
+                    }
+                }
             }
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", city.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", city.ProvinceId);
@@ -90,14 +115,46 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(city).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Entry(city).State = EntityState.Modified;
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+                //
+                var existingCitye = db.Cities.SingleOrDefault(
+                c => c.Name == city.Name
+                && c.SigCap == city.SigCap);
+                if (existingCitye != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                //
+                else
+                {
+                    ////
+                    db.Entry(city).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        //if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        //{
+                        //    ModelState.AddModelError(string.Empty, "Esiste gia un Registro con lo stesso valore");
+                        //}
+                        //else
+                        //{
+                        ModelState.AddModelError(string.Empty, exception.Message);
+                        //}
+                    }
+                }
             }
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", city.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", city.ProvinceId);
+
             return View(city);
         }
+
 
         // GET: Cities/Delete/5
         public ActionResult Delete(int? id)

@@ -57,18 +57,45 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Provinces.Add(province);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.Provinces.Any(d => d.Name.Equals(province.Name)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    // ??
+                    db.Provinces.Add(province);
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        //if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        //{
+                        //    ModelState.AddModelError(string.Empty, "Esiste gia un Registro con lo stesso valore");
+                        //}
+                        //else
+                        //{
+                        ModelState.AddModelError(string.Empty, exception.Message);
+                        //}
+                    }
+                }
             }
 
             ViewBag.DepartamentId = new SelectList(
-                DropDownHelper.GetDepartaments(), 
-                "DepartamentId", 
-                "Name", 
+                DropDownHelper.GetDepartaments(),
+                "DepartamentId",
+                "Name",
                 province.DepartamentId);
             return View(province);
         }
+
+
+
+
+       
 
         // GET: Provinces/Edit/5
         public ActionResult Edit(int? id)
@@ -82,6 +109,8 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
+
+
             ViewBag.DepartamentId = new SelectList(
                DropDownHelper.GetDepartaments(),
                 "DepartamentId", "" +
@@ -99,10 +128,38 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(province).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //db.Entry(province).State = EntityState.Modified;
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+                ///
+                if (db.Provinces.Any(d => d.Name.Equals(province.Name)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    ////
+                    db.Entry(province).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        //if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        //{
+                        //    ModelState.AddModelError(string.Empty," 2 Esiste già un Registro con lo stesso valore");
+                        //}
+                        //else
+                        //{
+                            ModelState.AddModelError(string.Empty, exception.Message);
+                        //}
+                        return View(province);
+                    }
+                }
             }
+            
             ViewBag.DepartamentId = new SelectList(
                 DropDownHelper.GetDepartaments(),
                 "DepartamentId", 

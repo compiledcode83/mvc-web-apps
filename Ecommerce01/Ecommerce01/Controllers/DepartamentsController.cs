@@ -41,6 +41,8 @@ namespace Ecommerce01.Controllers
             return View();
         }
 
+
+       
         // POST: Departaments/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -50,11 +52,38 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Departaments.Add(departament);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                //db.Departaments.Add(departament);
+                //verifica dupplicati
+                // if (db.Departaments.Any(d => d.Name.Equals(departament.Name)))
+                //var singleUser = users.SingleOrDefault(); 
+                //var singleDepartamentName = db.Departaments.SingleOrDefault().Name;
 
+                if (db.Departaments.Any(d => d.Name.Equals(departament.Name)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    // ??
+                    db.Departaments.Add(departament);
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        //if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        //{
+                        //    ModelState.AddModelError(string.Empty, "Esiste gia un Registro con lo stesso valore");
+                        //}
+                        //else
+                        //{
+                            ModelState.AddModelError(string.Empty, exception.Message);
+                        //}
+                    }
+                }
+            }
             return View(departament);
         }
 
@@ -82,9 +111,33 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(departament).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ///
+                if (db.Departaments.Any(d => d.Name.Equals(departament.Name)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                { 
+                    ////
+                    db.Entry(departament).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception exception)
+                    {
+                        if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("_Index"))
+                        {
+                            ModelState.AddModelError(string.Empty, "There are a record with the same value");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, exception.Message);
+                        }
+                        return View(departament);
+                    }
+                }
             }
             return View(departament);
         }
@@ -111,8 +164,23 @@ namespace Ecommerce01.Controllers
         {
             Departament departament = db.Departaments.Find(id);
             db.Departaments.Remove(departament);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                if (exception.InnerException?.InnerException != null && exception.InnerException.InnerException.Message.Contains("REFERENCE"))
+                {
+                    ModelState.AddModelError(string.Empty, "Il Registro non puo essere eliminato perche esso ha degli altri registri collegati!");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+                return View(departament);
+            }
         }
 
         protected override void Dispose(bool disposing)

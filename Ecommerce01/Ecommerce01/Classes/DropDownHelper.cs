@@ -38,3 +38,11 @@ namespace Ecommerce01.Classes
         }
     }
 }
+
+//private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+//{
+//    var departmentsQuery = from d in db.Departments
+//                           orderby d.Name
+//                           select d;
+//    ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
+//}
