@@ -201,7 +201,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\DropDownHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\GenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -218,9 +220,19 @@
     <Compile Include="Migrations\201801242112329_SeedConfigurations.Designer.cs">
       <DependentUpon>201801242112329_SeedConfigurations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801281422058_SeedConfigurations1.cs" />
+    <Compile Include="Migrations\201801281422058_SeedConfigurations1.Designer.cs">
+      <DependentUpon>201801281422058_SeedConfigurations1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801281444306_AddCompaCateg.cs" />
+    <Compile Include="Migrations\201801281444306_AddCompaCateg.Designer.cs">
+      <DependentUpon>201801281444306_AddCompaCateg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Departament.cs" />
     <Compile Include="Models\Ecommerce01Context.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -303,6 +315,16 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Companies\Create.cshtml" />
+    <Content Include="Views\Companies\Delete.cshtml" />
+    <Content Include="Views\Companies\Details.cshtml" />
+    <Content Include="Views\Companies\Edit.cshtml" />
+    <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,6 +349,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801242112329_SeedConfigurations.resx">
       <DependentUpon>201801242112329_SeedConfigurations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281422058_SeedConfigurations1.resx">
+      <DependentUpon>201801281422058_SeedConfigurations1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281444306_AddCompaCateg.resx">
+      <DependentUpon>201801281444306_AddCompaCateg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

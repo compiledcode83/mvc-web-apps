@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Ecommerce01.Models.Company>
+
+@{
+    ViewBag.Title = "Aziende";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
+</p>
+<table class="table">
+@foreach (var item in Model)
+{
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logo)
+        </th>
+     </tr>
+    @* attention *@
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+            OK
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Logo)
+        </td>
+     </tr>
+    <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.City.Name)
+            </th>
+            <td>  
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Departament.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departament.Name)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Province.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province.Name)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Locality)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locality)
+            </td>
+        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartitaIva)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartitaIva)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.CodiceFiscale)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodiceFiscale)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneMobil)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneMobil)
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fax)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.http)
+        </th>
+        <td colspan="2">
+            @Html.DisplayFor(modelItem => item.http)
+        </td>
+   </tr> 
+    <tr>
+        <td colspan="5">
+            @Html.ActionLink("Modifica", "Edit", new { id = item.CompanyId }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Dettagli", "Details", new { id = item.CompanyId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Elimina", "Delete", new { id = item.CompanyId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+@*<div class="btn-group">
+    <button>Apple</button>
+    <button>Samsung</button>
+    <button>Sony</button>
+</div>*@

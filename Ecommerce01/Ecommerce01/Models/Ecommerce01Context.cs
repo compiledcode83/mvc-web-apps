@@ -19,6 +19,11 @@ namespace Ecommerce01.Models
         public DbSet<Province> Provinces { get; set; }
 
         public DbSet<City> Cities { get; set; }
+
+
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
         //add
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,6 +31,10 @@ namespace Ecommerce01.Models
             modelBuilder.Entity<Departament>().ToTable("Departament");
             modelBuilder.Entity<Province>().ToTable("Province");
             modelBuilder.Entity<City>().ToTable("City");
+
+            modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Company>().ToTable("Company");
+            
 
             //add for indexes
 
@@ -62,5 +71,7 @@ namespace Ecommerce01.Models
                      .HasPrecision(18, 6);
 
         }
+
+       
     }
 }

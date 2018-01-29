@@ -51,6 +51,9 @@ namespace Ecommerce01.Models
         public virtual Departament Departament { get; set; }
         //side one to many
         public virtual ICollection<City> Cities { get; set; }
-               
+
+        //side one to many
+        public virtual ICollection<Company> Companies { get; set; }
+
     }
 }
