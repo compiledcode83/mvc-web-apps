@@ -19,7 +19,7 @@ namespace Ecommerce01.Controllers
         public ActionResult Index()
         {
             var cities = db.Cities.Include(c => c.Departament).Include(c => c.Province);
-            return View(cities.ToList());
+            return View(cities.ToList().OrderBy(c => c.Name));
         }
 
         // GET: Cities/Details/5

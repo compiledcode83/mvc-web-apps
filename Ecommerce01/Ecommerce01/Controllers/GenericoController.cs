@@ -23,6 +23,17 @@ namespace Ecommerce01.Controllers
             return Json(provinces);
         }
 
+        public JsonResult GetCities(int provinceId)
+        {
+            //can be
+            //https://stackoverflow.com/questions/4596371/what-are-the-downsides-to-turning-off-proxycreationenabled-for-ctp5-of-ef-code-f
+            //http://www.c-sharpcorner.com/UploadFile/db2972/json-result-in-controller-sample-in-mvc-day-13/
+            _db.Configuration.ProxyCreationEnabled = false;
+            var cities = _db.Cities.Where(c => c.ProvinceId == provinceId);
+            // can be  return Json(modelList,JsonRequestBehavior.AllowGet);
+            return Json(cities);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

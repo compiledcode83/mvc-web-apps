@@ -79,3 +79,33 @@ h4 small,
     background-color: #d10418 !important;
 }*/
 
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #3172b2;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: mediumvioletred;
+    border: 0;
+}
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        color: #040b11;
+        text-decoration: none;
+        background-color: #c7e1fc;
+    }
+
+    .dropdown-item.active, .dropdown-item:active {
+        color: #fff;
+        text-decoration: none;
+        background-color: #2a3a4c;
+    }
+
+    .dropdown-item.disabled, .dropdown-item:disabled {
+        color: #6c757d;
+        background-color: transparent;
+    }

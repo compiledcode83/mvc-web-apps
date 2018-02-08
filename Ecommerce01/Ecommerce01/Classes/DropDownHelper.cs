@@ -32,6 +32,17 @@ namespace Ecommerce01.Classes
             return provinces = provinces.OrderBy(p => p.Name).ToList();
         }
 
+        public static List<City> GetCities()
+        {
+            var cities = db.Cities.ToList();
+            cities.Add(new City
+            {
+                CityId = 0,
+                Name = "[Selezione una Città...]"
+            });
+            return cities = cities.OrderBy(c => c.Name).ToList();
+        }
+
         public void Dispose()
         {
             db.Dispose();

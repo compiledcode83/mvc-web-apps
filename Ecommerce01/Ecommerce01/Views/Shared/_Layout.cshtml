@@ -12,7 +12,7 @@
 </head>
 <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        @Html.ActionLink("Ecommerce Base", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Ecommerce01", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         @*<a class="navbar-brand" href="#">Ecommerce Base</a>*@
         <button class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -26,27 +26,40 @@
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Chi siamo", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Contatti", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Regioni", "Index", "Departaments", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Province", "Index", "Provinces", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Città", "Index", "Cities", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Settori", "Index", "Categories", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Aziende", "Index", "Companies", new { area = "" }, new { @class = "nav-link" })</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
+               
+                <li class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" 
+                       data-toggle="dropdown" 
+                       aria-haspopup="true" 
+                       aria-expanded="false">
+                        AdminUserMenu
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                        <li class="dropdown-item active">@Html.ActionLink("Aziende", "Index", "Companies", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        <li  class="dropdown-item">@Html.ActionLink("Città", "Index", "Cities", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        <li class="dropdown-item">@Html.ActionLink("Province", "Index", "Provinces", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        <li class="dropdown-item">@Html.ActionLink("Regioni", "Index", "Departaments", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        <li class="dropdown-item">@Html.ActionLink("Settori", "Index", "Categories", new { area = "" }, new { @class = "dropdown-item" })</li>
+                    </ul>
+                </li>
+
+              </ul>     
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Italy - FVG - mobappdev1 -  ECommerce ASP.NET Core MVC</p>
+            </footer>
         </div>
 
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Italy - FVG - mobappdev1 -  ECommerce ASP.NET Core MVC</p>
-        </footer>
-    </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Scripts/script.js")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/script.js")
-    @RenderSection("scripts", required: false)
-</body>
-</html>

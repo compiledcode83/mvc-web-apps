@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Ecommerce01.Classes;
 using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
@@ -17,7 +18,7 @@ namespace Ecommerce01.Controllers
         // GET: Companies
         public ActionResult Index()
         {
-            var companies = db.Companies.Include(c => c.City).Include(c => c.Departament).Include(c => c.Province);
+            var companies = db.Companies.Include(c => c.Departament).Include(c => c.Province).Include(c => c.City);
             return View(companies.ToList());
         }
 
@@ -39,9 +40,10 @@ namespace Ecommerce01.Controllers
         // GET: Companies/Create
         public ActionResult Create()
         {
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name");
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name");
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "Name");
+            //
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name");
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name");
+            ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name");
             return View();
         }
 
@@ -58,10 +60,10 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name", company.CityId);
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", company.DepartamentId);
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "Name", company.ProvinceId);
+            
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
+            ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
             return View(company);
         }
 
@@ -77,9 +79,10 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name", company.CityId);
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", company.DepartamentId);
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "Name", company.ProvinceId);
+
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
+            ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
             return View(company);
         }
 
@@ -96,9 +99,10 @@ namespace Ecommerce01.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "Name", company.CityId);
-            ViewBag.DepartamentId = new SelectList(db.Departaments, "DepartamentId", "Name", company.DepartamentId);
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "Name", company.ProvinceId);
+
+            ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
+            ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
+            ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
             return View(company);
         }
 

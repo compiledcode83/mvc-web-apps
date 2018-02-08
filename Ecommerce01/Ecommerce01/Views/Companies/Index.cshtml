@@ -4,7 +4,7 @@
     ViewBag.Title = "Aziende";
 }
 
-<h2>Index</h2>
+<h2>Lista Aziende</h2>
 
 <p>
     @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
@@ -31,7 +31,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
-            OK
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AddressO)

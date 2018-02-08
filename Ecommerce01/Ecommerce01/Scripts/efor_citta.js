@@ -1,21 +1,21 @@
 ﻿  $(document).ready(function () {
-            $("#DepartamentId").change(function () {
-                $("#ProvinceId").empty();
-                $("#ProvinceId").append('<option value="0">[Selezione una Provincia...]</option>');
+            $("#ProvinceId").change(function () {
+                $("#CityId").empty();
+                $("#CityId").append('<option value="0">[xxxxSelezione una xxx...]</option>');
                     $.ajax({
                         type: 'POST',
-                        url: Url,
+                        url: Url2,
                         dataType: 'json',
-                        data: { departamentId: $("#DepartamentId").val() },
+                        data: { provinceId: $("#ProvinceId").val() },
                         success: function (data) {
                             $.each(data, function (i, data) {
-                                $("#ProvinceId").append('<option value="'
-                                    + data.ProvinceId + '">'
+                                $("#CityId").append('<option value="'
+                                    + data.CityId + '">'
                                     + data.Name + '</option>');
                             });
                         },
                         error: function (ex) {
-                            alert('Errore nel prendere le Provincie' + ex);
+                            alert('Errore nel prendere le Città' + ex);
                         }
                     });
                     return false;
