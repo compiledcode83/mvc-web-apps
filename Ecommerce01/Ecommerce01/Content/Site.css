@@ -89,7 +89,7 @@ h4 small,
     color: #3172b2;
     text-align: inherit;
     white-space: nowrap;
-    background-color: mediumvioletred;
+    background-color:powderblue;
     border: 0;
 }
 
@@ -102,10 +102,14 @@ h4 small,
     .dropdown-item.active, .dropdown-item:active {
         color: #fff;
         text-decoration: none;
-        background-color: #2a3a4c;
+        background-color: #101e2d;
     }
 
     .dropdown-item.disabled, .dropdown-item:disabled {
         color: #6c757d;
         background-color: transparent;
     }
+
+.bg-dark {
+    background-color: #0a70d6 !important;
+}

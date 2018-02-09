@@ -1,7 +1,7 @@
 ﻿  $(document).ready(function () {
             $("#ProvinceId").change(function () {
                 $("#CityId").empty();
-                $("#CityId").append('<option value="0">[xxxxSelezione una xxx...]</option>');
+                $("#CityId").append('<option value="0">[Selezione una Città...]</option>');
                     $.ajax({
                         type: 'POST',
                         url: Url2,

@@ -1,132 +1,132 @@
 ﻿@model IEnumerable<Ecommerce01.Models.Company>
 
 @{
-    ViewBag.Title = "Aziende";
+    ViewBag.Title = "Index";
 }
 
-<h2>Lista Aziende</h2>
+<h2>Aziende</h2>
 
 <p>
-    @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
+   @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
 </p>
 <table class="table">
-@foreach (var item in Model)
-{
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
+
+        
+        <th>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Locality)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Province.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Departament.Name)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.AddressO)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.AddressL)
+        </th>*@
+       
+        <th>
+            @Html.DisplayNameFor(model => model.PartitaIva)
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CodiceFiscale)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.PhoneMobil)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.http)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Logo)
         </th>
-     </tr>
-    @* attention *@
+        
+    </tr>
 
+@foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.City.Name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Locality)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Province.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departament.Name)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AddressO)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.AddressL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Logo)
-        </td>
-     </tr>
-    <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.City.Name)
-            </th>
-            <td>  
-                @Html.DisplayFor(modelItem => item.City.Name)
-            </td>
-            <th>
-                @Html.DisplayNameFor(model => model.Departament.Name)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departament.Name)
-            </td>
-            <th>
-                @Html.DisplayNameFor(model => model.Province.Name)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.Province.Name)
-            </td>
-            <th>
-                @Html.DisplayNameFor(model => model.Locality)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.Locality)
-            </td>
-        </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PartitaIva)
-        </th>
+        </td>*@
+        
         <td>
             @Html.DisplayFor(modelItem => item.PartitaIva)
         </td>
-        <th>
-            @Html.DisplayNameFor(model => model.CodiceFiscale)
-        </th>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.CodiceFiscale)
-        </td>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneMobil)
-        </th>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.PhoneMobil)
-        </td>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax)
-        </th>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.Fax)
-        </td>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-        <th>
-            @Html.DisplayNameFor(model => model.http)
-        </th>
-        <td colspan="2">
+        @*<td>
             @Html.DisplayFor(modelItem => item.http)
+        </td>*@
+        
+
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Logo)
+        </td>*@
+        <td>
+            @if (!string.IsNullOrEmpty(item.Logo))
+                {
+                <img src="@Url.Content(item.Logo)" alt="Image" style="width:400px;height:400px;max-width: 100%; height: auto;" />
+            }
         </td>
-   </tr> 
+    </tr>
     <tr>
         <td colspan="5">
             @Html.ActionLink("Modifica", "Edit", new { id = item.CompanyId }, new { @class = "btn btn-info" })
-            @Html.ActionLink("Dettagli", "Details", new { id = item.CompanyId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Altri Dettagli", "Details", new { id = item.CompanyId }, new { @class = "btn btn-primary" })
             @Html.ActionLink("Elimina", "Delete", new { id = item.CompanyId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
 
 </table>
-
-@*<div class="btn-group">
-    <button>Apple</button>
-    <button>Samsung</button>
-    <button>Sony</button>
-</div>*@

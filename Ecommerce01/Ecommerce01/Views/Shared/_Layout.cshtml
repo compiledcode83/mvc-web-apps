@@ -8,6 +8,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/site.css")
+    @* added *@
 
 </head>
 <body>
@@ -36,10 +38,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
                         <li class="dropdown-item active">@Html.ActionLink("Aziende", "Index", "Companies", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        <li class="dropdown-item">@Html.ActionLink("Categorie", "Index", "Categories", new { area = "" }, new { @class = "dropdown-item" })</li>
                         <li  class="dropdown-item">@Html.ActionLink("Città", "Index", "Cities", new { area = "" }, new { @class = "dropdown-item" })</li>
                         <li class="dropdown-item">@Html.ActionLink("Province", "Index", "Provinces", new { area = "" }, new { @class = "dropdown-item" })</li>
                         <li class="dropdown-item">@Html.ActionLink("Regioni", "Index", "Departaments", new { area = "" }, new { @class = "dropdown-item" })</li>
-                        <li class="dropdown-item">@Html.ActionLink("Settori", "Index", "Categories", new { area = "" }, new { @class = "dropdown-item" })</li>
+                       
                     </ul>
                 </li>
 

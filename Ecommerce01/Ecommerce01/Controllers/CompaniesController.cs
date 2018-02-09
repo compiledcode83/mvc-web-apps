@@ -18,7 +18,7 @@ namespace Ecommerce01.Controllers
         // GET: Companies
         public ActionResult Index()
         {
-            var companies = db.Companies.Include(c => c.Departament).Include(c => c.Province).Include(c => c.City);
+            var companies = db.Companies.Include(c => c.City).Include(c => c.Province).Include(c => c.Departament);
             return View(companies.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace Ecommerce01.Controllers
         // GET: Companies/Create
         public ActionResult Create()
         {
-            //
+           
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name");
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name");
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name");
@@ -52,20 +52,43 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
+        public ActionResult Create([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
         {
             if (ModelState.IsValid)
             {
                 db.Companies.Add(company);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    var folder = "~/Content/Logos";
+                    //can be extention png,jpeg,gif,jpg
+                    var file = $"{company.CompanyId}.jpg";
+                    if (company.LogoFile != null)
+                    {
+                        var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
+                        if (response)
+                        {
+                            var pic = $"{folder}/{file}";
+                            company.Logo = pic;
+                            db.Entry(company).State = EntityState.Modified;
+                            db.SaveChanges();
+
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
             }
-            
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
             return View(company);
         }
+
+
 
         // GET: Companies/Edit/5
         public ActionResult Edit(int? id)
@@ -79,7 +102,6 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
-
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
@@ -91,15 +113,32 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
+        public ActionResult Edit([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(company).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if (company.LogoFile != null)
+                    {
+                        var folder = "~/Content/Logos";
+                        var file = $"{company.CompanyId}.jpg";
+                        var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
+                        if (response)
+                        {
+                            var pic = $"{folder}/{file}";
+                            company.Logo = pic;
+                        }
+                    }
+                    db.Entry(company).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
             }
-
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", company.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", company.ProvinceId);
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", company.CityId);
