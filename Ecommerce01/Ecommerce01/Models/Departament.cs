@@ -33,7 +33,8 @@ namespace Ecommerce01.Models
         //side one to many
         public virtual ICollection<Province> Provinces { get; set; }
 
-        //
         public virtual ICollection<Company> Companies { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }

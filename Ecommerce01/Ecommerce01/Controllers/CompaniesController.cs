@@ -62,13 +62,13 @@ namespace Ecommerce01.Controllers
                     db.SaveChanges();
                     var folder = "~/Content/Logos";
                     //can be extention png,jpeg,gif,jpg
-                    var file = $"{company.CompanyId}.jpg";
+                    var file = string.Format("{0}.jpg", company.CompanyId);
                     if (company.LogoFile != null)
                     {
                         var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
                         if (response)
                         {
-                            var pic = $"{folder}/{file}";
+                            var pic = string.Format("{0}/{1}", folder, file);
                             company.Logo = pic;
                             db.Entry(company).State = EntityState.Modified;
                             db.SaveChanges();
@@ -122,11 +122,11 @@ namespace Ecommerce01.Controllers
                     if (company.LogoFile != null)
                     {
                         var folder = "~/Content/Logos";
-                        var file = $"{company.CompanyId}.jpg";
+                        var file = string.Format("{0}.jpg", company.CompanyId);
                         var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
                         if (response)
                         {
-                            var pic = $"{folder}/{file}";
+                            var pic = string.Format("{0}/{1}", folder, file);
                             company.Logo = pic;
                         }
                     }

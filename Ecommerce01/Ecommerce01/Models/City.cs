@@ -53,5 +53,7 @@ namespace Ecommerce01.Models
 
         public virtual ICollection<Company> Companies { get; set; }
 
+        public virtual ICollection<User> Users { get; set; }
+
     }
 }

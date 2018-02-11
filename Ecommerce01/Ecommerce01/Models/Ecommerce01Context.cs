@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -24,11 +25,18 @@ namespace Ecommerce01.Models
         public DbSet<Company> Companies { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<User> Users { get; set; }
+        //public object Users { get; internal set; }
+
         //add
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //add
-            modelBuilder.Entity<Departament>().ToTable("Departament");
+         //add
+         modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        
+        //add
+        modelBuilder.Entity<Departament>().ToTable("Departament");
             modelBuilder.Entity<Province>().ToTable("Province");
             modelBuilder.Entity<City>().ToTable("City");
 
@@ -71,7 +79,5 @@ namespace Ecommerce01.Models
                      .HasPrecision(18, 6);
 
         }
-
-       
     }
 }

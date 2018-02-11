@@ -16,7 +16,7 @@ namespace Ecommerce01.Classes
             departments.Add(new Departament
             {
                 DepartamentId = 0,
-                Name = "[Selezione una Regione...]"
+                Name = "[Selezione una Regione...     ]"
             });
             return departments = departments.OrderBy(d => d.Name).ToList();
         }
@@ -27,7 +27,7 @@ namespace Ecommerce01.Classes
             provinces.Add(new Province
             {
                 ProvinceId = 0,
-                Name = "[Selezione una Provincia...]"
+                Name = "[Selezione una Provincia...     ]"
             });
             return provinces = provinces.OrderBy(p => p.Name).ToList();
         }
@@ -38,10 +38,22 @@ namespace Ecommerce01.Classes
             cities.Add(new City
             {
                 CityId = 0,
-                Name = "[Selezione una Città...]"
+                Name = "[Selezione una Città...     ]"
             });
             return cities = cities.OrderBy(c => c.Name).ToList();
         }
+
+        public static List<Company> GetCompanies()
+        {
+            var companies = db.Companies.ToList();
+            companies.Add(new Company
+            {
+                CompanyId = 0,
+                Name = "[Selezione una Azienda...     ]"
+            });
+            return companies = companies.OrderBy(c => c.Name).ToList();
+        }
+
 
         public void Dispose()
         {
@@ -49,11 +61,3 @@ namespace Ecommerce01.Classes
         }
     }
 }
-
-//private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
-//{
-//    var departmentsQuery = from d in db.Departments
-//                           orderby d.Name
-//                           select d;
-//    ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
-//}

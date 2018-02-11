@@ -201,6 +201,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\DropDownHelper.cs" />
     <Compile Include="Classes\FilesHelper.cs" />
+    <Compile Include="Classes\MailHelper.cs" />
+    <Compile Include="Classes\UsersHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProvincesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
     <Compile Include="Migrations\201801281444306_AddCompaCateg.Designer.cs">
       <DependentUpon>201801281444306_AddCompaCateg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802101009001_Add_UserManager.cs" />
+    <Compile Include="Migrations\201802101009001_Add_UserManager.Designer.cs">
+      <DependentUpon>201802101009001_Add_UserManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -239,6 +246,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -256,6 +264,7 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\efor_citta.js" />
+    <Content Include="Scripts\efor_aziend.js" />
     <Content Include="Scripts\efor_prov.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -327,11 +336,16 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Logos\" />
-    <Folder Include="Views\Generico\" />
+    <Folder Include="Content\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -358,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801281444306_AddCompaCateg.resx">
       <DependentUpon>201801281444306_AddCompaCateg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101009001_Add_UserManager.resx">
+      <DependentUpon>201802101009001_Add_UserManager.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

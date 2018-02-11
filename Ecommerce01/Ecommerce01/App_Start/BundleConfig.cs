@@ -24,6 +24,7 @@ namespace Ecommerce01
                       "~/Scripts/respond.js",
                        "~/Scripts/efor_prov.js",
                         "~/Scripts/efor_citta.js",
+                        "~/Scripts/efor_aziend.js",
                        "~/Scripts/script.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jquery")

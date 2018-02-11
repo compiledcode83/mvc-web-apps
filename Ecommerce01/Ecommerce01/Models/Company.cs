@@ -37,17 +37,17 @@ namespace Ecommerce01.Models
         public int CityId { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [MaxLength(100, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
+        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "IndirizzoSedeOperativa ")]
         public string AddressO { get; set; }
 
         //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [MaxLength(100, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
+        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "IndirizzoSedeLegale")]
         public string AddressL { get; set; }
 
         //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [MaxLength(60, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
+        [MaxLength(100, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "Località")]
         public string Locality { get; set; }
 
@@ -101,6 +101,8 @@ namespace Ecommerce01.Models
         public virtual Departament Departament { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
 
 
     }

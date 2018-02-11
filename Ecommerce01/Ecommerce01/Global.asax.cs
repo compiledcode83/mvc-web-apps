@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
+using Ecommerce01.Classes;
 using Ecommerce01.Models;
 
 namespace Ecommerce01
@@ -22,7 +22,9 @@ namespace Ecommerce01
             //added
             //and simplify with usings
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<Ecommerce01Context, Migrations.Configuration>());
-          
+            //last add
+            CheckRolesAndSuperUser();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -30,7 +32,18 @@ namespace Ecommerce01
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        //
+        //last add
+        private void CheckRolesAndSuperUser()
+        {
+            //developer i'am Vargas
+            UsersHelper.CheckRole("Admin");
+            //Altri admin of ecommerce Clients
+            UsersHelper.CheckRole("User");
+            //SuperUser can create Users is always Admin
+            UsersHelper.CheckSuperUser();
+
+        }
+
         //added
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
@@ -38,5 +51,6 @@ namespace Ecommerce01
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
         }
+
     }
 }
