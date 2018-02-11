@@ -11,6 +11,7 @@ using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProvincesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();

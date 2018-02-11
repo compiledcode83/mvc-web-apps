@@ -10,6 +10,7 @@ using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
+    [Authorize(Roles = "User")]
     public class CategoriesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();

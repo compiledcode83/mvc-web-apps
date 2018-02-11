@@ -15,7 +15,7 @@ namespace Ecommerce01.Models
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [MaxLength(50, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "Regione")]
-        //[Index("Departament_Name_Index", IsUnique = true)]
+        [Index("Department_Name_Index", IsUnique = true)]
         public string Name { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N6}", ApplyFormatInEditMode = true)]

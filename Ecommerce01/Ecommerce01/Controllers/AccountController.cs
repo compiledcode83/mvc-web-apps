@@ -17,6 +17,8 @@ namespace Ecommerce01.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //last add
+        private Ecommerce01Context _db = new Ecommerce01Context();
 
         public AccountController()
         {
@@ -26,6 +28,19 @@ namespace Ecommerce01.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+
+        //last add
+        public void Logo(LoginViewModel model)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.UserName == model.Email);
+            if (user == null) return;
+            var company = _db.Companies.Find(user.CompanyId);
+            if (company != null)
+            {
+                Session["Logo"] = company.Logo;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -78,7 +93,9 @@ namespace Ecommerce01.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
+                //last add
                 case SignInStatus.Success:
+                    Logo(model);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -392,6 +409,8 @@ namespace Ecommerce01.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //last add
+            Session["Logo"] = null;
             return RedirectToAction("Index", "Home");
         }
 

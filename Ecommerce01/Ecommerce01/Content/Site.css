@@ -89,7 +89,7 @@ h4 small,
     color: #3172b2;
     text-align: inherit;
     white-space: nowrap;
-    background-color:powderblue;
+    background-color: powderblue;
     border: 0;
 }
 
@@ -98,7 +98,7 @@ h4 small,
         text-decoration: none;
         background-color: #c7e1fc;
     }
-
+  
     .dropdown-item.active, .dropdown-item:active {
         color: #fff;
         text-decoration: none;
@@ -113,3 +113,30 @@ h4 small,
 .bg-dark {
     background-color: #0a70d6 !important;
 }
+
+/*/*add last*/
+/*.navbar-light .navbar-text {
+    color: rgba(255, 255, 0, 0.5);
+}
+
+    .navbar-light .navbar-text a {
+        color: rgba(255, 255, 0, 0.9);
+    }
+
+        .navbar-light .navbar-text a:hover, .navbar-light .navbar-text a:focus {
+            color: rgba(255, 255, 0, 0.9);
+        }*/
+
+/*add last*/
+/*.navbar-dark .navbar-text {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+    .navbar-dark .navbar-text a {
+        color: #fff;
+    }
+
+        .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
+            color: #fff;
+        }*/
+

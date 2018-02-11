@@ -16,7 +16,7 @@ namespace Ecommerce01.Models
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [MaxLength(60, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "RagioneSociale-Azienda")]
-        //[Index("City_Name_Index", 2, IsUnique = true)]
+        [Index("City_Name_Index", 2, IsUnique = true)]
         public string Name { get; set; }
 
 
@@ -28,7 +28,7 @@ namespace Ecommerce01.Models
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [Display(Name = "Regione")]
         [Range(1, double.MaxValue, ErrorMessage = "Devi selezionare un {0}")]
-        //[Index("City_Name_Index", 1, IsUnique = true)]
+        [Index("City_Name_Index", 1, IsUnique = true)]
         public int DepartamentId { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
@@ -53,9 +53,6 @@ namespace Ecommerce01.Models
 
         [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
-
-      
-
 
         [MaxLength(15, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "PartitaIva")]
@@ -104,13 +101,6 @@ namespace Ecommerce01.Models
 
         public virtual ICollection<User> Users { get; set; }
 
-
     }
 }
-
-//[Required(ErrorMessage = "Questo campo {0} è necessario!")]
-//[StringLength(5, MinimumLength = 5)]
-//[Display(Name = "CAP")]
-//[RegularExpression("^[0-9]*$", ErrorMessage = "Cap deve ser numerico")]
-//public string SigCap { get; set; }
 

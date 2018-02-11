@@ -3,26 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
     public class HomeController : Controller
     {
+        //last add
+        private Ecommerce01Context db = new Ecommerce01Context();
+
         public ActionResult Index()
         {
-            return View();
+            //usuario loggeado User.Identity.Name
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            return View(user);
+            //var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            //return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Pagina che descrive la propria applicazione.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Pagine dei contatti.";
 
             return View();
         }

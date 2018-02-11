@@ -15,13 +15,15 @@ namespace Ecommerce01.Classes
         private static readonly ApplicationDbContext UserContext = new ApplicationDbContext();
         private static readonly Ecommerce01Context db = new Ecommerce01Context();
 
-        public static bool DeleteUser(string userName, string roleName)
+        //public static bool DeleteUser(string userName, string roleName)
+        public static bool DeleteUser(string userName)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(UserContext));
             var userAsp = userManager.FindByEmail(userName);
             if (userAsp == null)
                 return false;
-            var response = userManager.RemoveFromRole(userAsp.Id, roleName);
+            //var response = userManager.RemoveFromRole(userAsp.Id, roleName);
+            var response = userManager.Delete(userAsp);
             return response.Succeeded;
         }
 
@@ -55,6 +57,7 @@ namespace Ecommerce01.Classes
             var email = WebConfigurationManager.AppSettings["AdminUser"];
             var password = WebConfigurationManager.AppSettings["AdminPassWord"];
             var userASP = userManager.FindByName(email);
+            //superuser and Admin
             if (userASP == null)
             {
                 CreateUserAsp(email, "Admin", password);

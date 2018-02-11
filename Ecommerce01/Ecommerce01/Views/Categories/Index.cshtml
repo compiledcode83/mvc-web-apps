@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Ecommerce01.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categorie";
 }
 
-<h2>Index</h2>
+<h2>Categorie Merceologiche</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
 </p>
 <table class="table">
     <tr>
@@ -29,11 +29,12 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
+            @Html.ActionLink("Modifica", "Edit", new { id = item.CategoryId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Dettagli", "Details", new { id = item.CategoryId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Elimina", "Delete", new { id = item.CategoryId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
 
 </table>
+

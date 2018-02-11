@@ -11,6 +11,7 @@ using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
@@ -18,7 +19,11 @@ namespace Ecommerce01.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.City).Include(u => u.Company).Include(u => u.Departament).Include(u => u.Province);
+            var users = db.Users
+                .Include(u => u.City)
+                .Include(u => u.Company)
+                .Include(u => u.Departament)
+                .Include(u => u.Province);
             return View(users.ToList());
         }
 
@@ -48,29 +53,24 @@ namespace Ecommerce01.Controllers
         }
 
         // POST: Users/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,UserName,FirstName,LastName,DateBirth,Phone,Address,Photo,PhotoFile,DepartamentId,ProvinceId,CityId,CompanyId")] User user)
         {
-
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
                 try
                 {
                     db.SaveChanges();
-
-
-                    //attention Role
+                    //attention Role User
                     UsersHelper.CreateUserAsp(user.UserName, "User");
-                    var folder = "~/Content/Users";
-                    //can be extention png,jpeg,gif,jpg
-                    var file = string.Format("{0}.jpg", user.UserId);
 
                     if (user.PhotoFile != null)
                     {
+                        var folder = "~/Content/Users";
+                        //can be extention png,jpeg,gif,jpg
+                        var file = string.Format("{0}.jpg", user.UserId);
                         var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
                         if (response)
                         {
@@ -107,6 +107,7 @@ namespace Ecommerce01.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", user.CityId);
             ViewBag.CompanyId = new SelectList(DropDownHelper.GetCompanies(), "CompanyId", "Name", user.CompanyId);
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", user.DepartamentId);
@@ -127,10 +128,21 @@ namespace Ecommerce01.Controllers
                 var file = string.Format("{0}.jpg", user.UserId);
                 if (user.PhotoFile != null)
                 {
-                    var pic = string.Format("{0}/{1}.jpg", folder, file);
+                    var pic = string.Format("{0}/{1}", folder, file);
                     var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
                     user.Photo = pic;
                 }
+                // if modify email ??? instanciate another db context
+                var db_other = new Ecommerce01Context();
+                //search user
+                var currentUser = db_other.Users.Find(user.UserId);
+                //validate ?
+                if (currentUser.UserName != user.UserName)
+                {
+                    UsersHelper.UpdateUserName(currentUser.UserName, user.UserName);
+                }
+
+                db_other.Dispose();
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
@@ -151,7 +163,7 @@ namespace Ecommerce01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -164,9 +176,12 @@ namespace Ecommerce01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
+            var user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            //last add
+            UsersHelper.DeleteUser(user.UserName);
+            //attention bool
             return RedirectToAction("Index");
         }
 

@@ -48,9 +48,23 @@ namespace Ecommerce01
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             CultureInfo culture = new CultureInfo("it-IT");
+            var myCultureStr = "it-IT";
+            DateTimeFormatInfo dtfi = CultureInfo.CreateSpecificCulture(myCultureStr).DateTimeFormat;
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
+
         }
 
     }
 }
+//string[] cultures = { "en-US", "ja-JP", "fr-FR" };
+//DateTime date1 = new DateTime(2011, 5, 1);
+
+//Console.WriteLine(" {0,7} {1,19} {2,10}\n", "CULTURE", "PROPERTY VALUE", "DATE");
+
+//      foreach (var culture in cultures) {
+//         DateTimeFormatInfo dtfi = CultureInfo.CreateSpecificCulture(culture).DateTimeFormat;
+//Console.WriteLine(" {0,7} {1,19} {2,10}", culture, 
+//                           dtfi.ShortDatePattern, 
+//                           date1.ToString("d", dtfi));
+//      }

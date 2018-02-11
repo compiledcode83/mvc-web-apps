@@ -15,7 +15,7 @@ namespace Ecommerce01.Models
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [MaxLength(256, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "E-Mail")]
-        [Index("User_Name_Index", IsUnique = true)]
+        [Index("User_UserName_Index", IsUnique = true)]
         [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
