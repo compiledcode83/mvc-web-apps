@@ -207,6 +207,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DepartamentsController.cs" />
     <Compile Include="Controllers\GenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -240,11 +241,21 @@
     <Compile Include="Migrations\201802111606569_Indexes.Designer.cs">
       <DependentUpon>201802111606569_Indexes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802132156390_Customer.cs" />
+    <Compile Include="Migrations\201802132156390_Customer.Designer.cs">
+      <DependentUpon>201802132156390_Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802140110432_Customer1.cs" />
+    <Compile Include="Migrations\201802140110432_Customer1.Designer.cs">
+      <DependentUpon>201802140110432_Customer1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyCustomer.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Departament.cs" />
     <Compile Include="Models\Ecommerce01Context.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -345,6 +356,11 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -382,6 +398,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802111606569_Indexes.resx">
       <DependentUpon>201802111606569_Indexes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802132156390_Customer.resx">
+      <DependentUpon>201802132156390_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140110432_Customer1.resx">
+      <DependentUpon>201802140110432_Customer1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

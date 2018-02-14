@@ -142,6 +142,13 @@ namespace Ecommerce01.Controllers
                     UsersHelper.UpdateUserName(currentUser.UserName, user.UserName);
                 }
 
+                if (currentUser.DateBirth != user.DateBirth)
+                {
+                    user.DateBirth = new DateTime(1971, 06, 22);
+                   
+                }
+
+
                 db_other.Dispose();
 
                 db.Entry(user).State = EntityState.Modified;

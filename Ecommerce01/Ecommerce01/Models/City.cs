@@ -40,7 +40,6 @@ namespace Ecommerce01.Models
         [Display(Name = "Latitudine")]
         public decimal? Latitud { get; set; }
 
-
         [DisplayFormat(DataFormatString = "{0:N6}", ApplyFormatInEditMode = true)]
         [Range(1, double.MaxValue, ErrorMessage = "Entrare un valore {0} fra {1} e {2}")]
         [Display(Name = "Longitudine")]
@@ -54,6 +53,8 @@ namespace Ecommerce01.Models
         public virtual ICollection<Company> Companies { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public virtual ICollection<Customer> Customers { get; set; }
 
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
 
 namespace Ecommerce01.Models
 {
@@ -13,6 +9,8 @@ namespace Ecommerce01.Models
         public Ecommerce01Context() : base("DefaultConnection")
         {
             // db.Configuration.ProxyCreationEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Departament> Departaments { get; set; }
@@ -27,22 +25,35 @@ namespace Ecommerce01.Models
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<CompanyCustomer> CompanyCustomers { get; set; }
+
         //public object Users { get; internal set; }
+
+        //public DbSet<CompanyCustomer> CompanyCustomers { get; set; }
+        //public DbSet<Customer> Customers { get; set; }
 
         //add
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-         //add
-         modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        
-        //add
-        modelBuilder.Entity<Departament>().ToTable("Departament");
+            //add
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            //add
+            modelBuilder.Entity<Departament>().ToTable("Departament");
             modelBuilder.Entity<Province>().ToTable("Province");
             modelBuilder.Entity<City>().ToTable("City");
 
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Company>().ToTable("Company");
-            
+
+            //modelBuilder.Entity<User>().ToTable("User");
+            //modelBuilder.Entity<Customer>().ToTable("Customer");
+            // modelBuilder.Entity<CompanyCustomer>().ToTable("CompanyCustomer");
+
+
 
             //add for indexes
 

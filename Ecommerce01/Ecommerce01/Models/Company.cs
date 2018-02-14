@@ -9,7 +9,6 @@ namespace Ecommerce01.Models
 {
     public class Company
     { 
-
         [Key]
         public int CompanyId { get; set; }
 
@@ -19,11 +18,25 @@ namespace Ecommerce01.Models
         [Index("City_Name_Index", 2, IsUnique = true)]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [StringLength(20, MinimumLength = 10)]
+        [Display(Name = "Telefono")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Telefono deve ser numerico")]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [Display(Name = "Provincia")]
-        [Range(1, double.MaxValue, ErrorMessage = "Devi selezionare un {0}")]
-        public int ProvinceId { get; set; }
+        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
+        [Display(Name = "SedeOperativa ")]
+        public string AddressO { get; set; }
+
+        //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
+        [Display(Name = "SedeLegale")]
+        public string AddressL { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string Logo { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [Display(Name = "Regione")]
@@ -32,44 +45,27 @@ namespace Ecommerce01.Models
         public int DepartamentId { get; set; }
 
         [Required(ErrorMessage = "Questo campo {0} è necessario!")]
+        [Display(Name = "Provincia")]
+        [Range(1, double.MaxValue, ErrorMessage = "Devi selezionare un {0}")]
+        public int ProvinceId { get; set; }
+
+        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [Display(Name = "Città-Comune")]
         [Range(1, double.MaxValue, ErrorMessage = "Devi selezionare un {0}")]
         public int CityId { get; set; }
-
-        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
-        [Display(Name = "IndirizzoSedeOperativa ")]
-        public string AddressO { get; set; }
-
-        //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [MaxLength(200, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
-        [Display(Name = "IndirizzoSedeLegale")]
-        public string AddressL { get; set; }
 
         //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [MaxLength(100, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
         [Display(Name = "Località")]
         public string Locality { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        public string Logo { get; set; }
-
         [MaxLength(15, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
-        [Display(Name = "PartitaIva")]
+        [Display(Name = "Partita Iva")]
         public string PartitaIva { get; set; }
 
         [MaxLength(15, ErrorMessage = "Questo campo {0} deve essere lungo {1} caratteri!")]
-        [Display(Name = "CodiceFiscale")]
+        [Display(Name = "Cod.Fiscale")]
         public string CodiceFiscale { get; set; }
-
-
-        [Required(ErrorMessage = "Questo campo {0} è necessario!")]
-        [StringLength(20, MinimumLength = 10)]
-        [Display(Name = "Telefono")]
-        //[RegularExpression("^[0-9]*$", ErrorMessage = "Telefono deve ser numerico")]
-        [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }
-
 
         //[Required(ErrorMessage = "Questo campo {0} è necessario!")]
         [StringLength(20, MinimumLength = 10)]
@@ -84,7 +80,6 @@ namespace Ecommerce01.Models
         [Display(Name = "E-mail")]
         [RegularExpression("^([a-zA-Z0-9_\\-\\.]+)@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", ErrorMessage = "Indirizzo e-amail deve essere in formatto corretto !")]
         public string Email { get; set; }
-        
 
         public string http { get; set; }
 
@@ -100,6 +95,8 @@ namespace Ecommerce01.Models
         public virtual ICollection<Category> Categories { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public virtual ICollection<CompanyCustomer> CompanyCustomers { get; set; }
 
     }
 }
