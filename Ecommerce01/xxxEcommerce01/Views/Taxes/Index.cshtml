@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Ecommerce01.Models.Tax>
+
+@{
+    ViewBag.Title = "Tasse";
+}
+
+<h2>Tasse</h2>
+
+<p>
+    @Html.ActionLink("Crea Nuova", "Create", new { }, new { @class = "btn btn-info" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id = item.TaxId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Dettagli", "Details", new { id = item.TaxId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Elimina", "Delete", new { id = item.TaxId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

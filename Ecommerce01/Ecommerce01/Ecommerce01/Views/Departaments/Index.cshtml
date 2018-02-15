@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Ecommerce01.Models.Departament>
+
+@{
+    ViewBag.Title = "Regione";
+}
+
+<h2>Regioni</h2>
+
+<p>
+    @Html.ActionLink("Crea", "Create", new { }, new { @class = "btn btn-info" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitud)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitud)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id=item.DepartamentId }, new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Dettagli", "Details", new { id=item.DepartamentId },new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Elimina", "Delete", new { id=item.DepartamentId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
