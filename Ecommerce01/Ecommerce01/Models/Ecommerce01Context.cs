@@ -49,7 +49,7 @@ namespace Ecommerce01.Models
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Company>().ToTable("Company");
 
-            //modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Tax>().ToTable("Tax");
             //modelBuilder.Entity<Customer>().ToTable("Customer");
             // modelBuilder.Entity<CompanyCustomer>().ToTable("CompanyCustomer");
 
@@ -90,5 +90,7 @@ namespace Ecommerce01.Models
                      .HasPrecision(18, 6);
 
         }
+
+        public System.Data.Entity.DbSet<Ecommerce01.Models.Tax> Taxes { get; set; }
     }
 }

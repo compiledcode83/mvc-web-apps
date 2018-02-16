@@ -98,6 +98,7 @@ namespace Ecommerce01.Models
 
         public virtual ICollection<CompanyCustomer> CompanyCustomers { get; set; }
 
+        public virtual ICollection<Tax> Taxes { get; set; }
+
     }
 }
-
