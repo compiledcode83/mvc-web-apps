@@ -59,9 +59,9 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                //
-                if (db.Users.Any(u => u.UserName.Equals(user.UserName)))
-                {
+                //?dupplicati
+               if (db.Users.Any(u => u.UserName.Equals(user.UserName) && u.CompanyId.Equals(user.CompanyId)))
+               {
                     ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
                 }
                 else
@@ -91,7 +91,8 @@ namespace Ecommerce01.Controllers
                     }
                     catch (Exception ex)
                     {
-                        ModelState.AddModelError(string.Empty, ex.Message);
+                        //ModelState.AddModelError(string.Empty, ex.Message);
+                        ModelState.AddModelError(string.Empty, ex.Message + " NON RIESCO A SALVARE - User Duplicato");
                     }
                 }
             }
@@ -120,6 +121,7 @@ namespace Ecommerce01.Controllers
             ViewBag.CompanyId = new SelectList(DropDownHelper.GetCompanies(), "CompanyId", "Name", user.CompanyId);
             ViewBag.DepartamentId = new SelectList(DropDownHelper.GetDepartaments(), "DepartamentId", "Name", user.DepartamentId);
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", user.ProvinceId);
+
             return View(user);
         }
 
@@ -130,37 +132,38 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                var folder = "~/Content/Users";
-                var file = string.Format("{0}.jpg", user.UserId);
+                //var folder = "~/Content/Users";
+                //var file = $"{user.UserId}.jpg";
                 if (user.PhotoFile != null)
                 {
-                    var pic = string.Format("{0}/{1}", folder, file);
+                    var file = string.Format("{0}.jpg", user.UserId);
+                    var folder = "~/Content/Users";
                     var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
-                    user.Photo = pic;
+                    user.Photo = string.Format("{0}/{1}", folder, file);
                 }
-                // if modify email ??? instanciate another db context
-                var db_other = new Ecommerce01Context();
-                //search user
-                var currentUser = db_other.Users.Find(user.UserId);
-                //validate ?
-                if (currentUser.UserName != user.UserName)
+                //if user change e-amail
+                using (var db2 = new Ecommerce01Context())
                 {
-                    UsersHelper.UpdateUserName(currentUser.UserName, user.UserName);
-                }
-                //Pay attention
-                if (currentUser.DateBirth != user.DateBirth)
-                {
-                    //UsersHelper.UpdateDataBirthUser(currentUser.UserName, user.UserName);
-                    user.DateBirth = new DateTime(1971, 06, 19);
-                   
-                }
+                    var currentUser = db2.Users.Find(user.UserId);
 
-                db_other.Dispose();
+                    if (currentUser.UserName != user.UserName)
+                    {
+                        UsersHelper.UpdateUserName(currentUser.UserName, user.UserName);
+                    }
+                }
 
                 db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message + " NON RIESCO A SALVARE, email duplicata presente nel sistema");
+                    //return View(user);
+                    //ModelState.AddModelError(string.Empty, ex.Message);
+                }
             }
             ViewBag.CityId = new SelectList(DropDownHelper.GetCities(), "CityId", "Name", user.CityId);
             ViewBag.CompanyId = new SelectList(DropDownHelper.GetCompanies(), "CompanyId", "Name", user.CompanyId);
@@ -168,6 +171,8 @@ namespace Ecommerce01.Controllers
             ViewBag.ProvinceId = new SelectList(DropDownHelper.GetProvinces(), "ProvinceId", "Name", user.ProvinceId);
             return View(user);
         }
+                 
+
 
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
@@ -177,13 +182,13 @@ namespace Ecommerce01.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = db.Users.Find(id);
+
             if (user == null)
             {
                 return HttpNotFound();
             }
+
             return View(user);
-
-
         }
 
         // POST: Users/Delete/5

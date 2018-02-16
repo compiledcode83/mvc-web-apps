@@ -10,6 +10,7 @@ using Ecommerce01.Models;
 
 namespace Ecommerce01.Controllers
 {
+    [Authorize(Roles = "User")]
     public class TaxesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
@@ -66,14 +67,29 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Taxes.Add(tax);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //?dupplicati
+                if (db.Taxes.Any(d => d.Description.Equals(tax.Description) && d.CompanyId.Equals(tax.CompanyId)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    db.Taxes.Add(tax);
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
             }
-
             //ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", tax.CompanyId);
             return View(tax);
-        }
+        }           
+
 
         // GET: Taxes/Edit/5
         public ActionResult Edit(int? id)
@@ -100,9 +116,25 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tax).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //?dupplicati
+                if (db.Taxes.Any(d => d.Description.Equals(tax.Description) && d.CompanyId.Equals(tax.CompanyId)))
+                {
+                    ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
+                }
+                else
+                {
+                    db.Entry(tax).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                        return View(tax);
+                    }
+                }
             }
             //ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", tax.CompanyId);
             return View(tax);

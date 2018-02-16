@@ -70,8 +70,9 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
+                //pets.Any(p => p.Age > 1 && p.Vaccinated == false);
                 //
-                if (db.Categories.Any(d => d.Description.Equals(category.Description)))
+                if (db.Categories.Any(d => d.Description.Equals(category.Description) && d.CompanyId.Equals(category.CompanyId)))
                 {
                     ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
                 }
@@ -116,7 +117,7 @@ namespace Ecommerce01.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Categories.Any(c => c.Description.Equals(category.Description)))
+                if (db.Categories.Any(d => d.Description.Equals(category.Description) && d.CompanyId.Equals(category.CompanyId)))
                 {
                     ModelState.AddModelError(string.Empty, "Esiste già un Registro con lo stesso valore");
                 }
@@ -143,7 +144,8 @@ namespace Ecommerce01.Controllers
                     }
                 }
             }
-               
+            
+
             //ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "Name", category.CompanyId);
             return View(category);
     }

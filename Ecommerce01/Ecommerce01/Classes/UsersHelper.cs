@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
 using Ecommerce01.Models;
 using Microsoft.AspNet.Identity;
@@ -32,9 +30,13 @@ namespace Ecommerce01.Classes
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(UserContext));
             var userAsp = userManager.FindByEmail(currentUserName);
             if (userAsp == null)
+            {
                 return false;
+            }
+            //two methods
             userAsp.UserName = newUserName;
             userAsp.Email = newUserName;
+            //
             var response = userManager.Update(userAsp);
             return response.Succeeded;
         }
