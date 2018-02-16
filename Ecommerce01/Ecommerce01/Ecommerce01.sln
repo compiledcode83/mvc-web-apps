@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce01", "Ecommerce01\Ecommerce01.csproj", "{7DFCCF1C-91C1-4315-9657-BD9DA09F0E2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce01", "Ecommerce01.csproj", "{7DFCCF1C-91C1-4315-9657-BD9DA09F0E2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D606FCCE-B889-4B11-BC08-112E77DBB7D7}
+		SolutionGuid = {1EFB21D3-66C1-4974-B0DB-5E5C8BFB3673}
 	EndGlobalSection
 EndGlobal
