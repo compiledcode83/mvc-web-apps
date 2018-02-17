@@ -50,6 +50,7 @@ namespace Ecommerce01.Models
             modelBuilder.Entity<Company>().ToTable("Company");
 
             modelBuilder.Entity<Tax>().ToTable("Tax");
+            modelBuilder.Entity<Product>().ToTable("Product");
             //modelBuilder.Entity<Customer>().ToTable("Customer");
             // modelBuilder.Entity<CompanyCustomer>().ToTable("CompanyCustomer");
 
@@ -91,6 +92,8 @@ namespace Ecommerce01.Models
 
         }
 
-        public System.Data.Entity.DbSet<Ecommerce01.Models.Tax> Taxes { get; set; }
+        public DbSet<Tax> Taxes { get; set; }
+
+        public DbSet<Product> Products { get; set; }
     }
 }

@@ -212,6 +212,7 @@
     <Compile Include="Controllers\GenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProvincesController.cs" />
     <Compile Include="Controllers\TaxesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -230,6 +231,10 @@
     <Compile Include="Migrations\201802152334275_Taxes.Designer.cs">
       <DependentUpon>201802152334275_Taxes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802162101555_ProductsTaxes.cs" />
+    <Compile Include="Migrations\201802162101555_ProductsTaxes.Designer.cs">
+      <DependentUpon>201802162101555_ProductsTaxes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -241,6 +246,7 @@
     <Compile Include="Models\Ecommerce01Context.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Province.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\User.cs" />
@@ -348,10 +354,16 @@
     <Content Include="Views\Taxes\Details.cshtml" />
     <Content Include="Views\Taxes\Edit.cshtml" />
     <Content Include="Views\Taxes\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Logos\" />
+    <Folder Include="Content\Products\" />
     <Folder Include="Content\Users\" />
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802152334275_Taxes.resx">
       <DependentUpon>201802152334275_Taxes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802162101555_ProductsTaxes.resx">
+      <DependentUpon>201802162101555_ProductsTaxes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
