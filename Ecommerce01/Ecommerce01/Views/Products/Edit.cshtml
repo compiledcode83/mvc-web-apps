@@ -59,23 +59,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "form-control-label col-md-2" })
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <span class="btn btn-default btn-file">
-                    @Html.TextBoxFor(model => model.ImageFile, null, new { type = "file", @class = "input-file" })
-                    @*<input type="submit" value="questo valore" />*@
-                </span>
+                @Html.DisplayFor(model => model.Image)
+               @* @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "form-control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="btn btn-default btn-file">
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <img src="@Url.Content(Model.Image)" alt="Image" style="width: 150px; height: 150px; max-width: 100%; height: auto;" />
+                    }
+                    @*@Html.TextBoxFor(model => model.ImageFile, new { type = "file", value = "test", @class = "input-file" })*@
+                    @Html.TextBoxFor(model => model.ImageFile, null, new { type = "file", value = "test", @class = "input-file" })
+                    @*null, new { type = "file", @class = "input-file" })*@
+                </span>
+            </div>
+        </div>
+       
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -98,3 +104,36 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/script.js")
 }
+
+@*@model ImageViewModel*@
+@*public class ImageViewModel
+    {
+        public string Name { get; set; }
+
+    mio public string Image { get; set; }
+        public string FileName { get; set; }
+
+         mio public HttpPostedFileBase ImageFile { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
+    }*@
+@*<form action="" method="post" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div>
+            Name:
+            @Html.EditorFor(model => model.Name)
+        </div>
+        <div>
+            Current uploaded file: mio Image
+            @Html.DisplayFor(model => model.FileName)
+        </div>
+        <div>
+            Image Upload:
+            @Html.TextBoxFor(m => m.ImageUpload, new { type = "file", value = "test" })
+        </div>
+        <button type="submit">Save</button>
+
+    </form>*@
+
