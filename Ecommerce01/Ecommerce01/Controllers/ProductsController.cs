@@ -17,7 +17,7 @@ namespace Ecommerce01.Controllers
     public class ProductsController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-        private const int itemsonPage = 5;
+        private const int itemsonPage = 4;
         // GET: Products
         public ActionResult Index(int ? page = null)
         {

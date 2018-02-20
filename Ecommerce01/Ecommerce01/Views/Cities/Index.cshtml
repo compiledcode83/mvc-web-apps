@@ -12,7 +12,7 @@
 </p>
 <table class="table">
     <tr>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
         </th>
@@ -34,51 +34,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Departament.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Province.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SigCap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitud)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitud)
-        </td>
-        <td>
-           @Html.ActionLink("Modifica", "Edit", new { id = item.CityId }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Dettagli", "Details", new { id = item.CityId }, new { @class = "btn btn-primary" }) |
-           @Html.ActionLink("Elimina", "Delete", new { id = item.CityId }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departament.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SigCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.ActionLink("Modifica", "Edit", new { id = item.CityId }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Dettagli", "Details", new { id = item.CityId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Elimina", "Delete", new { id = item.CityId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
-
-
 @if (Model.PageCount > 1)
 {
-    @Html.Raw(string.Format("Pagina: {0}, di: {1}", (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), Model.PageCount));
+    <h6>@Html.Raw(string.Format("Pagina: {0}, di: {1}", (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), Model.PageCount))</h6>;
     @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page,
-        sortOrder = ViewBag.CurrentSort,
-        currentFilter = ViewBag.CurrentFilter
-    }));
-}﻿
-@*Pagina @(Model.PageCount <  Model.PageNumber ? 0 :  Model.PageNumber ), di: @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new
+    new
     {
         page,
         sortOrder = ViewBag.CurrentSort,
         currentFilter = ViewBag.CurrentFilter
-    }))*@
+    }));
+}﻿

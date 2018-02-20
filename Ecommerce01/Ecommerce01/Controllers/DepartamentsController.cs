@@ -16,13 +16,13 @@ namespace Ecommerce01.Controllers
     public class DepartamentsController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-
+        private const int itemsonPage = 4;
         // GET: Departaments
         public ActionResult Index(int ? page = null)
         {
             page = (page ?? 1);
             var departaments = db.Departaments.OrderBy(d => d.Name);
-            return View(departaments.ToPagedList((int)page, 5));
+            return View(departaments.ToPagedList((int)page, itemsonPage));
         }
 
         // GET: Departaments/Details/5

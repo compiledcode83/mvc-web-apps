@@ -16,7 +16,7 @@ namespace Ecommerce01.Controllers
     public class ProvincesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-        private const int itemsonPage = 5;
+        private const int itemsonPage = 4;
         // GET: Provinces
         public ActionResult Index(int ? page = null)
         {

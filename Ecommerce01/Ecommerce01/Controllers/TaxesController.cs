@@ -16,7 +16,7 @@ namespace Ecommerce01.Controllers
     {
         private Ecommerce01Context db = new Ecommerce01Context();
         private User user;
-        private const int itemsonPage = 5;
+        private const int itemsonPage = 4;
         // GET: taxes
         public ActionResult Index(int? page = null)
         {
