@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ecommerce01.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce01.Controllers
 {
@@ -16,10 +18,11 @@ namespace Ecommerce01.Controllers
         private Ecommerce01Context db = new Ecommerce01Context();
 
         // GET: Departaments
-        public ActionResult Index()
+        public ActionResult Index(int ? page = null)
         {
-            var departaments = db.Departaments.OrderBy(d => d.Name).ToList();
-            return View(departaments);
+            page = (page ?? 1);
+            var departaments = db.Departaments.OrderBy(d => d.Name);
+            return View(departaments.ToPagedList((int)page, 5));
         }
 
         // GET: Departaments/Details/5

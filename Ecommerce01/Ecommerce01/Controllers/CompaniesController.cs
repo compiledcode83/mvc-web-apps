@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ecommerce01.Classes;
 using Ecommerce01.Models;
+using PagedList;
 
 namespace Ecommerce01.Controllers
 {
@@ -15,12 +16,16 @@ namespace Ecommerce01.Controllers
     public class CompaniesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-
+        private const int itemsonPage = 3;
         // GET: Companies
-        public ActionResult Index()
+        public ActionResult Index(int ? page = null)
         {
-            var companies = db.Companies.Include(c => c.City).Include(c => c.Province).Include(c => c.Departament);
-            return View(companies.OrderBy(c => c.Name).ToList());
+            page = (page ?? 1);
+            var companies = db.Companies.Include(c => c.City)
+                .Include(c => c.Province)
+                .Include(c => c.Departament)
+                .OrderBy(c => c.Name);
+            return View(companies.ToPagedList((int)page, itemsonPage));
         }
 
         // GET: Companies/Details/5
@@ -53,7 +58,7 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
+        public ActionResult Create([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company, HttpPostedFileBase LogoFile)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +71,9 @@ namespace Ecommerce01.Controllers
                     var file = string.Format("{0}.jpg", company.CompanyId);
                     if (company.LogoFile != null)
                     {
-                        var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
+                        //var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
+                        var response = FilesHelper.UploadPhoto(LogoFile, folder, file, company.Logo);
+                        //var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file, );
                         if (response)
                         {
                             var pic = string.Format("{0}/{1}", folder, file);
@@ -114,7 +121,7 @@ namespace Ecommerce01.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company)
+        public ActionResult Edit([Bind(Include = "CompanyId,Name,ProvinceId,DepartamentId,CityId,AddressO,AddressL,Locality,Logo,LogoFile,PartitaIva,CodiceFiscale,Phone,PhoneMobil,Fax,Email,http")] Company company, HttpPostedFileBase LogoFile)
         {
             if (ModelState.IsValid)
             {
@@ -124,7 +131,8 @@ namespace Ecommerce01.Controllers
                     {
                         var folder = "~/Content/Logos";
                         var file = string.Format("{0}.jpg", company.CompanyId);
-                        var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
+                        var response = FilesHelper.UploadPhoto(LogoFile, folder, file, company.Logo);
+                        //var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
                         if (response)
                         {
                             var pic = string.Format("{0}/{1}", folder, file);

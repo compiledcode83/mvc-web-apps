@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Ecommerce01.Classes;
 using Ecommerce01.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce01.Controllers
 {
@@ -15,12 +17,17 @@ namespace Ecommerce01.Controllers
     public class CitiesController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-
+        private const int itemsonPage = 5;
         // GET: Cities
-        public ActionResult Index()
+        public ActionResult Index(int? page = null)
         {
-            var cities = db.Cities.Include(c => c.Departament).Include(c => c.Province).OrderBy(c => c.Name);
-            return View(cities.ToList());
+            page = (page ?? 1);
+            var cities = db.Cities.Include(c => c.Departament).Include(c => c.Province)
+            .OrderBy(c => c.DepartamentId)
+            .ThenBy(c => c.ProvinceId)
+            .ThenBy(c => c.Name);            
+            return View(cities.ToPagedList((int)page, itemsonPage));
+            //return View(cities.ToList());
         }
 
         // GET: Cities/Details/5

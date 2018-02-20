@@ -32,11 +32,14 @@ namespace Ecommerce01.Controllers
 
 
         //last add
-        public void Logo(LoginViewModel model)
+        public void LogoinBar(LoginViewModel model)
         {
             var user = _db.Users.FirstOrDefault(u => u.UserName == model.Email);
+
             if (user == null) return;
+
             var company = _db.Companies.Find(user.CompanyId);
+
             if (company != null)
             {
                 Session["Logo"] = company.Logo;
@@ -95,7 +98,7 @@ namespace Ecommerce01.Controllers
             {
                 //last add
                 case SignInStatus.Success:
-                    Logo(model);
+                    LogoinBar(model);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -438,7 +441,7 @@ namespace Ecommerce01.Controllers
                     _signInManager = null;
                 }
             }
-
+            _db.Dispose();
             base.Dispose(disposing);
         }
 

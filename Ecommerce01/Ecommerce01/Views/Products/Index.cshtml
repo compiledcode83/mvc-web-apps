@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Ecommerce01.Models.Product>
-
+﻿@model PagedList.IPagedList<Ecommerce01.Models.Product>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Prodotti";
 }
@@ -13,26 +13,26 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Description)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Category.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tax.Description)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Tax.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BarCode)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().BarCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>*@
+        @Html.DisplayNameFor(model =>  model.FirstOrDefault().Remarks)
+    </th>*@
         <th></th>
     </tr>
 
@@ -71,3 +71,14 @@
 }
 
 </table>
+@if (Model.PageCount > 1)
+{
+    @Html.Raw(string.Format("Pagina: {0}, di: {1}", (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), Model.PageCount));
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }));
+}﻿

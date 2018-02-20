@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Ecommerce01.Classes;
 using Ecommerce01.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce01.Controllers
 {
@@ -15,16 +17,20 @@ namespace Ecommerce01.Controllers
     public class UsersController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-
+              
+        private const int itemsonPage = 3;
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index(int? page = null)
         {
+            page = (page ?? 1);
             var users = db.Users
                 .Include(u => u.City)
                 .Include(u => u.Company)
                 .Include(u => u.Departament)
-                .Include(u => u.Province);
-            return View(users.OrderBy(u => u.UserName).ToList());
+                .Include(u => u.Province)
+                .OrderBy(u => u.UserName);
+            return View(users.ToPagedList((int)page, itemsonPage));
+           
         }
 
         // GET: Users/Details/5
@@ -55,7 +61,7 @@ namespace Ecommerce01.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,FirstName,LastName,DateBirth,Phone,Address,Photo,PhotoFile,DepartamentId,ProvinceId,CityId,CompanyId")] User user)
+        public ActionResult Create([Bind(Include = "UserId,UserName,FirstName,LastName,DateBirth,Phone,Address,Photo,PhotoFile,DepartamentId,ProvinceId,CityId,CompanyId")] User user, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
@@ -78,8 +84,10 @@ namespace Ecommerce01.Controllers
                             var folder = "~/Content/Users";
                             //can be extention png,jpeg,gif,jpg
                             var file = string.Format("{0}.jpg", user.UserId);
-                            var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
+                            //var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
+                            var response = FilesHelper.UploadPhoto(PhotoFile, folder, file, user.Photo);
                             if (response)
+                                if (response)
                             {
                                 var pic = string.Format("{0}/{1}", folder, file);
                                 user.Photo = pic;
@@ -128,7 +136,7 @@ namespace Ecommerce01.Controllers
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,FirstName,LastName,DateBirth,Phone,Address,Photo,PhotoFile,DepartamentId,ProvinceId,CityId,CompanyId")] User user)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,FirstName,LastName,DateBirth,Phone,Address,Photo,PhotoFile,DepartamentId,ProvinceId,CityId,CompanyId")] User user, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
@@ -138,7 +146,8 @@ namespace Ecommerce01.Controllers
                 {
                     var file = string.Format("{0}.jpg", user.UserId);
                     var folder = "~/Content/Users";
-                    var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
+                    //var response = FilesHelper.UploadPhoto(user.PhotoFile, folder, file);
+                    var response = FilesHelper.UploadPhoto(PhotoFile, folder, file, user.Photo);
                     user.Photo = string.Format("{0}/{1}", folder, file);
                 }
                 //if user change e-amail

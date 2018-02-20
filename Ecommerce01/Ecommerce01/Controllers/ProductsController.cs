@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Ecommerce01.Classes;
 using Ecommerce01.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce01.Controllers
 {
@@ -15,17 +17,21 @@ namespace Ecommerce01.Controllers
     public class ProductsController : Controller
     {
         private Ecommerce01Context db = new Ecommerce01Context();
-
+        private const int itemsonPage = 5;
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int ? page = null)
         {
+            page = (page ?? 1);
             var user = db.Users.Where(u => u.UserName == User.Identity.Name)
                 .FirstOrDefault();
             var products = db.Products
                 .Include(p => p.Category)
                 .Include(p => p.Tax)
-                .Where(p => p.CompanyId == user.CompanyId);
-            return View(products.ToList());
+                .Where(p => p.CompanyId == user.CompanyId)
+                .OrderBy( p => p.Description);
+           
+            return View(products.ToPagedList((int)page, itemsonPage));
+            //return View(products.ToList());
         }
 
         // GET: Products/Details/5
@@ -61,7 +67,7 @@ namespace Ecommerce01.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,CompanyId,Description,BarCode,CategoryId,TaxId,Price,Image,ImageFile,Remarks")] Product product)
+        public ActionResult Create([Bind(Include = "ProductId,CompanyId,Description,BarCode,CategoryId,TaxId,Price,Image,ImageFile,Remarks")] Product product, HttpPostedFileBase ImageFile)
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name)
               .FirstOrDefault();
@@ -76,7 +82,8 @@ namespace Ecommerce01.Controllers
                     //var file = string.Format("{0}.jpg", product.CompanyId);
                     var file = string.Format("{0}.jpg", product.ProductId);
                     var folder = "~/Content/Products";
-                    var response = FilesHelper.UploadPhoto(product.ImageFile, folder, file);
+                    var response = FilesHelper.UploadPhoto(ImageFile, folder, file, product.Image);
+                    //var response = FilesHelper.UploadPhoto(product.ImageFile, folder, file);
                     if (response)
                     {
                         product.Image = string.Format("{0}/{1}", folder, file);
@@ -119,7 +126,7 @@ namespace Ecommerce01.Controllers
         // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,CompanyId,Description,BarCode,CategoryId,TaxId,Price,Image,ImageFile,Remarks")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,CompanyId,Description,BarCode,CategoryId,TaxId,Price,Image,ImageFile,Remarks")] Product product, HttpPostedFileBase ImageFile)
         {
             //
              var user = db.Users.Where(u => u.UserName == User.Identity.Name)
@@ -134,12 +141,14 @@ namespace Ecommerce01.Controllers
             {
                 try
                 {
-                    if (product.ImageFile != null)
-                    {
+                    //if (product.ImageFile != null)
+                        if (ImageFile != null)
+                        {
                         var folder = "~/Content/Products";
                         var file = string.Format("{0}.jpg", product.ProductId);
                         //var file = $"{product.ProductId}.jpg";
-                        var response = FilesHelper.UploadPhoto(product.ImageFile, folder, file);
+                         //System.IO.File.Delete(Path.Combine(HttpContext.Current.Server.MapPath(folder), name));
+                        var response = FilesHelper.UploadPhoto(ImageFile, folder, file, product.Image);
                         if (response)
                         {
                             var pic = string.Format("{0}/{1}", folder, file);
